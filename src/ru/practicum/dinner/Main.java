@@ -1,5 +1,6 @@
 package ru.practicum.dinner;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -10,6 +11,8 @@ public class Main {
     public static void main(String[] args) {
         dc = new DinnerConstructor();
         scanner = new Scanner(System.in);
+
+        dc.addDishesTemp();
 
         while (true) {
             printMenu();
@@ -41,25 +44,39 @@ public class Main {
         System.out.println("Введите название блюда:");
         String dishName = scanner.nextLine();
 
-        // добавьте новое блюдо
+        dc.addDishes(dishType, dishName);
     }
 
     private static void generateDishCombo() {
         System.out.println("Начинаем конструировать обед...");
 
         System.out.println("Введите количество наборов, которые нужно сгенерировать:");
-        int numberOfCombos = scanner.nextInt();
+        int numberOfCombos = 1;
+        try {
+            numberOfCombos = scanner.nextInt();
+        } catch (Exception exception) {
+            System.out.println("Количество должно быть указано числом.");
+            System.out.println("-".repeat(20));
+            scanner.nextLine();
+            return;
+        }
+
         scanner.nextLine();
 
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
         String nextItem = scanner.nextLine();
 
         //реализуйте ввод типов блюд
+        ArrayList<String> dishesTypes = new ArrayList<>();
         while (!nextItem.isEmpty()) {
-
+            if (dc.checkType(nextItem)) {
+                dishesTypes.add(nextItem);
+            } else {
+                System.out.println("Тип " + nextItem + " не существует. Введите другой тип.");
+            }
+            nextItem = scanner.nextLine();
         }
 
-        // сгенерируйте комбинации блюд и выведите на экран
-
+        dc.generateCombinations(numberOfCombos, dishesTypes);
     }
 }
