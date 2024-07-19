@@ -12,8 +12,6 @@ public class Main {
         dc = new DinnerConstructor();
         scanner = new Scanner(System.in);
 
-        dc.addDishesTemp();
-
         while (true) {
             printMenu();
             String command = scanner.nextLine();
@@ -51,7 +49,7 @@ public class Main {
         System.out.println("Начинаем конструировать обед...");
 
         System.out.println("Введите количество наборов, которые нужно сгенерировать:");
-        int numberOfCombos = 1;
+        int numberOfCombos;
         try {
             numberOfCombos = scanner.nextInt();
         } catch (Exception exception) {
@@ -73,6 +71,8 @@ public class Main {
                 dishesTypes.add(nextItem);
             } else {
                 System.out.println("Тип " + nextItem + " не существует. Введите другой тип.");
+                System.out.println("-".repeat(20));
+                return;
             }
             nextItem = scanner.nextLine();
         }
