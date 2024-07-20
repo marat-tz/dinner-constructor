@@ -1,6 +1,7 @@
 package ru.practicum.dinner;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -64,8 +65,7 @@ public class Main {
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
         String nextItem = scanner.nextLine();
 
-        //реализуйте ввод типов блюд
-        ArrayList<String> dishesTypes = new ArrayList<>();
+        List<String> dishesTypes = new ArrayList<>();
         while (!nextItem.isEmpty()) {
             if (dc.checkType(nextItem)) {
                 dishesTypes.add(nextItem);
